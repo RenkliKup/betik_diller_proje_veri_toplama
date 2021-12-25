@@ -34,6 +34,7 @@ def face_extractor(img):
 
 # Doing some Face Recognition with the webcam
 video_capture = cv2.VideoCapture(0)
+os.mkdir("image")
 os.chdir("./image/")
 os.mkdir("adem")
 input()
