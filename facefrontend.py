@@ -1,25 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 15 14:49:19 2019
 
-@author: krish.naik
-"""
 
 # Face Recognition
-
+import os
 # Importing the libraries
 from PIL import Image
-from keras.applications.vgg16 import preprocess_input
-import base64
-from io import BytesIO
-import json
-import random
+
 import cv2
-from keras.models import load_model
+
 import numpy as np
 
-from keras.preprocessing import image
-model = load_model('facefeatures_new_model_final.h5')
+
+
 
 # Loading the cascades
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -43,7 +34,12 @@ def face_extractor(img):
 
 # Doing some Face Recognition with the webcam
 video_capture = cv2.VideoCapture(0)
+os.chdir("./image/")
+os.mkdir("adem")
+input()
+img_counter=0
 while True:
+    
     _, frame = video_capture.read()
     #canvas = detect(gray, frame)
     #image, face =face_detector(frame)
@@ -57,17 +53,13 @@ while True:
                     #Our keras model used a 4D tensor, (images x height x width x channel)
                     #So changing dimension 128x128x3 into 1x128x128x3 
         img_array = np.expand_dims(img_array, axis=0)
-        pred = model.predict(img_array)
-        print(pred)
-                     
-        name="None matching"
         
-        if(pred[0][3]>0.5):
-            name='Krish'
-        cv2.putText(frame,name, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), 2)
-    else:
-        cv2.putText(frame,"No face found", (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), 2)
-    cv2.imshow('Video', frame)
+        cv2.imwrite(f"adem/{img_counter}.png",face)  
+        img_counter+=1            
+        print(img_counter)
+        cv2.imshow("se",face)
+
+    
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 video_capture.release()
