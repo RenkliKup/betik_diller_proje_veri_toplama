@@ -37,7 +37,7 @@ video_capture = cv2.VideoCapture(0)
 os.mkdir("image")
 os.chdir("./image/")
 os.mkdir("adem")
-input()
+
 img_counter=0
 while True:
     
