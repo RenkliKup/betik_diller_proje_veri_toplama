@@ -83,7 +83,7 @@ print('Number of trainable variables = {}'.format(len(model.trainable_variables)
 
 # Train the model
 # We will do it in 10 Iterations
-epochs = 30
+epochs = 5
 
 # Fitting / Training the model
 history = model.fit(train_generator,

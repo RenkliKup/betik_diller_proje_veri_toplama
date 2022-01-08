@@ -34,10 +34,25 @@ def face_extractor(img):
     return cropped_face
 
 # Doing some Face Recognition with the webcam
+number_lb="baris"
 video_capture = cv2.VideoCapture(0)
-os.mkdir("image")
-os.chdir("./image/")
-os.mkdir("adem")
+if not os.path.exists("image"):   
+    os.mkdir("image")
+    os.chdir("./image/")
+    if not os.path.exists(number_lb):
+        os.mkdir(number_lb)
+        os.chdir(f"./{number_lb}/")
+else:
+    os.chdir("./image/")
+    if not os.path.exists(number_lb):
+        os.mkdir(number_lb)
+        os.chdir(f"./{number_lb}/")
+    else:
+        os.chdir(f"./{number_lb}/")
+        
+        
+    
+
 
 img_counter=0
 while True:
@@ -56,8 +71,10 @@ while True:
                     #So changing dimension 128x128x3 into 1x128x128x3 
         img_array = np.expand_dims(img_array, axis=0)
         
-        cv2.imwrite(f"adem/{img_counter}.png",face)  
-        img_counter+=1            
+        cv2.imwrite(f"{img_counter}.png",face)  
+        img_counter+=1
+        if img_counter>=200:
+            break
         print(img_counter)
         cv2.imshow("se",face)
 
